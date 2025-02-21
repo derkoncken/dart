@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def apply_canny_edge(image_path, threshold1=40, threshold2=220):
+def apply_canny_edge(image_path, threshold1=40, threshold2=220, output_path="edges_output.jpg"):
     # Bild laden
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     if image is None:
@@ -26,10 +26,15 @@ def apply_canny_edge(image_path, threshold1=40, threshold2=220):
     # Warten auf eine Taste und Fenster schließen
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+    # Canny Edge Detection Bild speichern
+    cv2.imwrite(output_path, edges)
+    print(f"Kantenbild wurde gespeichert unter: {output_path}")
     
     return edges
 
 # Beispielaufruf
 if __name__ == "__main__":
     image_path = "test_images/init.jpg"  # Bildpfad anpassen
-    apply_canny_edge(image_path)
+    output_path = "test_images/init_canny_edges.jpg"  # Speicherort für das Canny Edge Bild
+    apply_canny_edge(image_path, output_path=output_path)
